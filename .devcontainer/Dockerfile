@@ -7,20 +7,26 @@ FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-10
 
 ARG TARGET_DISPLAY=":1"
 
+# VNC options
 ARG INSTALL_VNC="true"
 ARG MAX_VNC_RESOLUTION=1920x1080x16
 ARG TARGET_VNC_RESOLUTION=1920x1080
+ARG TARGET_VNC_DPI=72
 ARG TARGET_VNC_PORT=5901
 
+# noVNC (VNC web client) options
 ARG INSTALL_NOVNC="true"
 ARG NOVNC_VERSION=1.1.0
 ARG TARGET_NOVNC_PORT=6080
 ARG WEBSOCKETIFY_VERSION=0.9.0
 
+# Firefox is useful for testing things like browser launch events, but optional
 ARG INSTALL_FIREFOX="false"
 
+# Expected non-root username from base image
 ARG USERNAME=node
 
+# Core environment variables for X11, VNC, and fluxbox
 ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
 	MAX_VNC_RESOLUTION="${MAX_VNC_RESOLUTION}" \
 	VNC_RESOLUTION="${TARGET_VNC_RESOLUTION}" \
@@ -55,6 +61,7 @@ RUN apt-get update \
 		dbus-x11 \
 		x11-utils \
 		x11-xserver-utils \
+		xdg-utils \
 		fbautostart \
 		xterm \
 		eterm \
@@ -81,9 +88,9 @@ RUN apt-get update \
 	&& chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox \
 	&& chmod +x /usr/local/share/init-dev-container.sh /usr/local/bin/set-resolution \
 	#
-	# Install VNC and noVNC
+	# [Optional] Install VNC and noVNC
 	&& if [ "${INSTALL_VNC}" = "true" ]; then \
-		apt-get install -y x11vnc; \
+		apt-get -y install x11vnc; \
 	fi \
 	&& if [ "${INSTALL_NOVNC}" = "true" ]; then \
 		mkdir -p /usr/local/novnc \
