@@ -6,7 +6,8 @@
 			"MAX_VNC_RESOLUTION": "1920x1080x16",
 			"TARGET_VNC_RESOLUTION": "1280x720",
 			"TARGET_VNC_PORT": "5901",
-			"TARGET_NOVNC_PORT": "6080"
+			"TARGET_NOVNC_PORT": "6080",
+			"INSTALL_FIREFOX": "false"
 		}
 	},
 	"overrideCommand": false,

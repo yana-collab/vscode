@@ -17,6 +17,8 @@ ARG NOVNC_VERSION=1.1.0
 ARG TARGET_NOVNC_PORT=6080
 ARG WEBSOCKETIFY_VERSION=0.9.0
 
+ARG INSTALL_FIREFOX="false"
+
 ARG USERNAME=node
 
 ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
@@ -39,6 +41,13 @@ COPY fluxbox/* /home/${USERNAME}/.fluxbox/
 RUN apt-get update \
 	&& export DEBIAN_FRONTEND=noninteractive \
 	#
+	# Install the Cascadia Code fonts - https://github.com/microsoft/cascadia-code
+	&& curl -sSL https://github.com/microsoft/cascadia-code/releases/download/v2004.30/CascadiaCode_2004.30.zip -o /tmp/cascadia-fonts.zip \
+	&& unzip /tmp/cascadia-fonts.zip -d /tmp/cascadia-fonts \
+	&& mkdir -p /usr/share/fonts/truetype/cascadia \
+	&& mv /tmp/cascadia-fonts/ttf/* /usr/share/fonts/truetype/cascadia/ \
+	&& rm -rf /tmp/cascadia-fonts.zip /tmp/cascadia-fonts \
+	#
 	# Install X11, fluxbox and VS Code dependencies
 	&& apt-get -y install --no-install-recommends \
 		xvfb \
@@ -46,9 +55,12 @@ RUN apt-get update \
 		dbus-x11 \
 		x11-utils \
 		x11-xserver-utils \
+		fbautostart \
 		xterm \
 		eterm \
 		gnome-terminal \
+		gnome-keyring \
+		seahorse \
 		nautilus \
 		libx11-dev \
 		libxkbfile-dev \
@@ -57,9 +69,8 @@ RUN apt-get update \
 		libnss3 \
 		libxss1 \
 		libasound2 \
-		gnome-keyring \
-		seahorse \
 		xfonts-base \
+		xfonts-terminus \
 		fonts-noto \
 		fonts-wqy-microhei \
 		fonts-droid-fallback \
@@ -69,13 +80,6 @@ RUN apt-get update \
 	&& touch /root/.Xmodmap /home/${USERNAME}/.Xmodmap \
 	&& chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox \
 	&& chmod +x /usr/local/share/init-dev-container.sh /usr/local/bin/set-resolution \
-	#
-	# Install the Cascadia Code fonts - https://github.com/microsoft/cascadia-code
-	&& curl -sSL https://github.com/microsoft/cascadia-code/releases/download/v2004.30/CascadiaCode_2004.30.zip -o /tmp/cascadia-fonts.zip \
-	&& unzip /tmp/cascadia-fonts.zip -d /tmp/cascadia-fonts \
-	&& mkdir -p /usr/share/fonts/truetype/cascadia \
-	&& mv /tmp/cascadia-fonts/ttf/* /usr/share/fonts/truetype/cascadia/ \
-	&& rm -rf /tmp/cascadia-fonts.zip /tmp/cascadia-fonts \
 	#
 	# Install VNC and noVNC
 	&& if [ "${INSTALL_VNC}" = "true" ]; then \
@@ -92,6 +96,11 @@ RUN apt-get update \
 		&& apt-get -y install --no-install-recommends python-numpy \
 		&& ln -s /usr/local/novnc/websockify-${WEBSOCKETIFY_VERSION} /usr/local/novnc/noVNC-${NOVNC_VERSION}/utils/websockify \
 		&& rm /tmp/websockify-install.zip; \
+	fi \
+	#
+	# [Optional] Install Firefox
+	&& if [ "${INSTALL_FIREFOX}" = "true" ]; then \
+		apt-get -y install --no-install-recommends firefox-esr; \
 	fi \
 	#
 	# Clean up

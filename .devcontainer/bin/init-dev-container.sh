@@ -47,7 +47,13 @@ log "** SCRIPT START **"
 
 # Start dbus.
 log 'Running "/etc/init.d/dbus start".'
+if [ -f "/var/run/dbus/pid" ] && ! ps -p $(cat /var/run/dbus/pid) > /dev/null; then
+	sudoIf rm -f /var/run/dbus/pid
+fi
 sudoIf /etc/init.d/dbus start 2>&1 | sudoIf tee -a /tmp/dbus-daemon-system.log > /dev/null
+while ! pidof dbus-daemon > /dev/null; do
+	sleep 1
+done
 
 # Set up Xvfb.
 startInBackgroundIfNotRunning "Xvfb" sudoIf "Xvfb ${DISPLAY:-:1} -screen 0 ${MAX_VNC_RESOLUTION:-1920x1080x16}"
