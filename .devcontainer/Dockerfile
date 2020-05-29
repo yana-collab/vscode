@@ -8,7 +8,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-10
 ARG TARGET_DISPLAY=":1"
 
 # VNC options
-ARG INSTALL_VNC="true"
 ARG MAX_VNC_RESOLUTION=1920x1080x16
 ARG TARGET_VNC_RESOLUTION=1920x1080
 ARG TARGET_VNC_DPI=72
@@ -30,6 +29,7 @@ ARG USERNAME=node
 ENV DBUS_SESSION_BUS_ADDRESS="autolaunch:" \
 	MAX_VNC_RESOLUTION="${MAX_VNC_RESOLUTION}" \
 	VNC_RESOLUTION="${TARGET_VNC_RESOLUTION}" \
+	VNC_DPI="${TARGET_VNC_DPI}" \
 	VNC_PORT="${TARGET_VNC_PORT}" \
 	NOVNC_PORT="${TARGET_NOVNC_PORT}" \
 	DISPLAY="${TARGET_DISPLAY}" \
@@ -57,6 +57,7 @@ RUN apt-get update \
 	# Install X11, fluxbox and VS Code dependencies
 	&& apt-get -y install --no-install-recommends \
 		xvfb \
+		x11vnc \
 		fluxbox \
 		dbus-x11 \
 		x11-utils \
@@ -88,10 +89,7 @@ RUN apt-get update \
 	&& chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.Xmodmap /home/${USERNAME}/.fluxbox \
 	&& chmod +x /usr/local/share/init-dev-container.sh /usr/local/bin/set-resolution \
 	#
-	# [Optional] Install VNC and noVNC
-	&& if [ "${INSTALL_VNC}" = "true" ]; then \
-		apt-get -y install x11vnc; \
-	fi \
+	# [Optional] Install noVNC
 	&& if [ "${INSTALL_NOVNC}" = "true" ]; then \
 		mkdir -p /usr/local/novnc \
 		&& curl -sSL https://github.com/novnc/noVNC/archive/v${NOVNC_VERSION}.zip -o /tmp/novnc-install.zip \

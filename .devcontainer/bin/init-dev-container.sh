@@ -68,7 +68,7 @@ while ! pidof fluxbox > /dev/null; do
 done
 
 # Set resolution
-/usr/local/bin/set-resolution ${VNC_RESOLUTION:-1280x720}
+/usr/local/bin/set-resolution ${VNC_RESOLUTION:-1280x720} ${VNC_DPI:-72}
 
 # Start x11vnc if installed.
 if type x11vnc 2>&1 > /dev/null; then
