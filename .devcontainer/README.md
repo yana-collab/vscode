@@ -1,0 +1,59 @@
+# Code - OSS Development Container
+
+This repository includes a configuration for a development container that can be used to develop Code - OSS in an isolated local or cloud-based environment (using Visual Studio Codespaces).
+
+## Quick start - local
+
+1. Install Docker Desktop or Docker on your local machine. (See our [docs](https://aka.ms/vscode-remote/containers/getting-started) for additional details.)
+
+2. [Docker Desktop] If you are not using the new WSL2 Docker Desktop engine, increase the resources allocated to Docker Desktop to at least **4 Cores and 4 GB of RAM (8 GB recommended)**. Right-click on the Docker status bar item, go to **Preferences/Settings > Resources > Advanced** to do so.
+
+3. Install [Visual Studio Code Stable](https://code.visualstudio.com/) or [Insiders](https://code.visualstudio.com/insiders/) and the [Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension.
+
+    ![Image of Remote - Containers extension](https://microsoft.github.io/vscode-remote-release/images/remote-containers-extn.png)
+
+    > Note that the Remote - Containers extension requires the Visual Studio Code distribution of Code - OSS. See the [FAQ](https://aka.ms/vscode-remote/faq/license) for details.
+
+4. Press <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and select **Remote - Containers: Open Repository in Container...** command.
+
+    > Tip: While you can use your local source tree from the container, operations like `yarn install` can be slow on macOS or using the Hyper-V engine on Windows. We recommend this approach instead since it uses "named volume" rather than the local filesystem.
+
+5. Type `https://github.com/microsoft/vscode` (or a branch or PR URL) in the input box and press <kbd>Enter</kbd>.
+
+6. After the container is running, open a web browser and go to [http://localhost:6080](http://localhost:6080).
+
+7. Anything you start in VS Code or the integrated terminal will appear here. This container uses the[Fluxbox desktop](http://fluxbox.org/) to keep things lean. **Right-click on the desktop** to see menu options. It works with GNOME and GTK applications, so other tools can be installed if needed.
+
+## Quick start - Codespaces
+
+Note that the Codspaces browser-based editor cannot currently access the desktop environment in this containe (due to a [missing feature](https://github.com/MicrosoftDocs/vsonline/issues/117)). We recommend using Visual Studio Code from the desktop to connect instead in the near term.
+
+1. Install [Visual Studio Code Stable](https://code.visualstudio.com/) or [Insiders](https://code.visualstudio.com/insiders/) and the [Visual Studio Codespaces](https://aka.ms/vscs-ext-vscode) extension.
+
+    ![Image of VS Codespaces extension](https://microsoft.github.io/vscode-remote-release/images/codespaces-extn.png)
+
+    > Note that the Visual Studio Codespaces extension requires the Visual Studio Code distribution of Code - OSS.
+
+2. Sign in by pressing <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and selecting **Codespaces: Sign In**. You may also need to use the **Codespaces: Create Plan** if you do not have a plan. See the [Codespaces docs](https://aka.ms/vso-docs/vscode) for details.
+
+3. Press <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and select **Codespaes: Create New Codespace**.
+
+4. Use default settings, select a plan, and then enter the repository URL `https://github.com/microsoft/vscode` (or a branch or PR URL) in the input box when prompted.
+
+5. After the Codespace is running, open a web browser and go to [http://localhost:6080](http://localhost:6080).
+
+6. Anything you start in VS Code or the integrated terminal will appear here. This container uses the[Fluxbox desktop](http://fluxbox.org/) to keep things lean. **Right-click on the desktop** to see menu options. It works with GNOME and GTK applications, so other tools can be installed if needed.
+
+## Try it!
+
+Follow these steps:
+
+1. In your local VS Code, open a terminal (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>\`</kbd>) and type `yarn install`
+
+2. After everything installs, use the debugger to launch the **VS Code** configuration. (Typically the default, so you can press <kbd>F5</kbd>).
+
+    > **Note:** If launching times out, you can increase the value of `timeout` in the VS Code, Attach Main Process, Attach Extension Host, and Attach to Shared Process configurations.
+
+3. In a local browser, open [http://localhost:6080](http://localhost:6080) or use a VNC client to connect to localhost:5901.
+
+After a while Code - OSS will appear and you're all set!
