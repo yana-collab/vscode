@@ -262,7 +262,7 @@ export class ConfigurationManager implements IConfigurationManager {
 			}
 
 			return undefined;
-		}).filter(e => typeof e === 'string') as string[];
+		}).filter(type => typeof type === 'string' && !!this.getDebuggerLabel(type)) as string[];
 
 		return debugDynamicExtensionsTypes.map(type => {
 			return {
@@ -279,7 +279,7 @@ export class ConfigurationManager implements IConfigurationManager {
 								config,
 								buttons: [{
 									iconClass: 'codicon-gear',
-									tooltip: nls.localize('configureLaunchConfig', "Configure Debug Configuration in launch.json")
+									tooltip: nls.localize('editLaunchConfig', "Edit Debug Configuration in launch.json")
 								}],
 								launch
 							}))));

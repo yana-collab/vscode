@@ -42,10 +42,15 @@ export class NativeWorkbenchEnvironmentService extends EnvironmentService implem
 	}
 
 	@memoize
-	get webviewResourceRoot(): string { return 'vscode-resource://{{resource}}'; }
+	get webviewResourceRoot(): string {
+		return `${Schemas.oldVscodeWebviewResource}://{{resource}}`;
+
+		// TODO mjbvz: restore when switching to new protcol
+		// return `${Schemas.vscodeWebviewResource}://{{uuid}}/{{resource}}`;
+	}
 
 	@memoize
-	get webviewCspSource(): string { return 'vscode-resource:'; }
+	get webviewCspSource(): string { return `${Schemas.oldVscodeWebviewResource}:`; }
 
 	@memoize
 	get userRoamingDataHome(): URI { return this.appSettingsHome.with({ scheme: Schemas.userData }); }

@@ -62,7 +62,10 @@
 				isMouseDown = false;
 			});
 			newFrame.contentWindow.addEventListener('mousemove', tryDispatchSyntheticMouseEvent);
-		}
+		},
+		rewriteCSP: (csp) => {
+			return csp;
+		},
 	};
 
 	host.onMessage('devtools-opened', () => {
