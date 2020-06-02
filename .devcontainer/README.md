@@ -14,7 +14,7 @@ This repository includes a configuration for a development container that can be
 
     > Note that the Remote - Containers extension requires the Visual Studio Code distribution of Code - OSS. See the [FAQ](https://aka.ms/vscode-remote/faq/license) for details.
 
-4. Press <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and select **Remote - Containers: Open Repository in Container...** command.
+4. Press <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and select **Remote - Containers: Open Repository in Container...**.
 
     > Tip: While you can use your local source tree from the container, operations like `yarn install` can be slow on macOS or using the Hyper-V engine on Windows. We recommend this approach instead since it uses "named volume" rather than the local filesystem.
 
@@ -57,12 +57,14 @@ Follow these steps:
 
 2. After the build is complete, use a local browser to open [http://localhost:6080](http://localhost:6080) or use a VNC client to connect to localhost:5901. You should now see Code - OSS!
 
-4. Next, let's try debugging. Shut down Code - OSS by clicking the box in the upper right corner.
+Next, let's try debugging.
 
-5. Go to your local VS Code client, and use Run / Debug view to launch the **VS Code** configuration. (Typically the default, so you can likely just press <kbd>F5</kbd>).
+1. Shut down Code - OSS by clicking the box in the upper right corner using your browser or VNC client.
+
+2. Go to your local VS Code client, and use Run / Debug view to launch the **VS Code** configuration. (Typically the default, so you can likely just press <kbd>F5</kbd>).
 
     > **Note:** If launching times out, you can increase the value of `timeout` in the VS Code, Attach Main Process, Attach Extension Host, and Attach to Shared Process configurations.
 
-6. After a bit, Code - OSS will appear with the debugger attached!
+3. After a bit, Code - OSS will appear with the debugger attached!
 
 Enjoy!
