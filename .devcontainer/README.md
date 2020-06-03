@@ -1,12 +1,14 @@
 # Code - OSS Development Container
 
-This repository includes a configuration for a development container that can be used to develop Code - OSS in an isolated local or cloud-based environment (using Visual Studio Codespaces).
+This repository includes configuration for a development container for working with Code - OSS in an isolated local container or using [Visual Studio Codespaces](https://aka.ms/vso).
 
 ## Quick start - local
 
-1. Install Docker Desktop or Docker on your local machine. (See our [docs](https://aka.ms/vscode-remote/containers/getting-started) for additional details.)
+1. Install Docker Desktop or Docker on your local machine. (See [docs](https://aka.ms/vscode-remote/containers/getting-started) for additional details.)
 
 2. [Docker Desktop] If you are not using the new WSL2 Docker Desktop engine, increase the resources allocated to Docker Desktop to at least **4 Cores and 4 GB of RAM (8 GB recommended)**. Right-click on the Docker status bar item, go to **Preferences/Settings > Resources > Advanced** to do so.
+
+	> **Note:** The [Resource Monitor](https://marketplace.visualstudio.com/items?itemName=mutantdino.resourcemonitor) extension is included in the container so you can keep an eye on CPU/Memory in the status bar.
 
 3. Install [Visual Studio Code Stable](https://code.visualstudio.com/) or [Insiders](https://code.visualstudio.com/insiders/) and the [Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension.
 
@@ -16,13 +18,15 @@ This repository includes a configuration for a development container that can be
 
 4. Press <kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and select **Remote - Containers: Open Repository in Container...**.
 
-    > Tip: While you can use your local source tree from the container, operations like `yarn install` can be slow on macOS or using the Hyper-V engine on Windows. We recommend this approach instead since it uses "named volume" rather than the local filesystem.
+    > **Tip:** While you can use your local source tree instead, operations like `yarn install` can be slow on macOS or using the Hyper-V engine on Windows. We recommend the "open repository" approach instead since it uses "named volume" rather than the local filesystem.
 
 5. Type `https://github.com/microsoft/vscode` (or a branch or PR URL) in the input box and press <kbd>Enter</kbd>.
 
-6. After the container is running, open a web browser and go to [http://localhost:6080](http://localhost:6080).
+6. After the container is running, open a web browser and go to [http://localhost:6080](http://localhost:6080) or use a [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/) to connect to `localhost:5901`.
 
-7. Anything you start in VS Code or the integrated terminal will appear here. This container uses the[Fluxbox desktop](http://fluxbox.org/) to keep things lean. **Right-click on the desktop** to see menu options. It works with GNOME and GTK applications, so other tools can be installed if needed.
+Anything you start in VS Code or the integrated terminal will appear here.
+
+Next: **[Try it out!](#try-it)**
 
 ## Quick start - Codespaces
 
@@ -40,13 +44,17 @@ Note that the Codspaces browser-based editor cannot currently access the desktop
 
 4. Use default settings, select a plan, and then enter the repository URL `https://github.com/microsoft/vscode` (or a branch or PR URL) in the input box when prompted.
 
-5. After the Codespace is running, open a web browser and go to [http://localhost:6080](http://localhost:6080).
+5. After the container is running, open a web browser and go to [http://localhost:6080](http://localhost:6080) or use a [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/) to connect to `localhost:5901`.
 
-6. Anything you start in VS Code or the integrated terminal will appear here. This container uses the[Fluxbox desktop](http://fluxbox.org/) to keep things lean. **Right-click on the desktop** to see menu options. It works with GNOME and GTK applications, so other tools can be installed if needed.
+6. Anything you start in VS Code or the integrated terminal will appear here.
 
 ## Try it!
 
-Follow these steps:
+This container uses the [Fluxbox](http://fluxbox.org/) window manager to keep things lean. **Right-click on the desktop** to see menu options. It works with GNOME and GTK applications, so other tools can be installed if needed.
+
+Note you can also set the resolution from the command line by typing `set-resolution`.
+
+To start working with Code - OSS, follow these steps:
 
 1. In your local VS Code, open a terminal (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>\`</kbd>) and type the following commands:
 
@@ -55,15 +63,17 @@ Follow these steps:
     scripts/code.sh
     ```
 
-2. After the build is complete, use a local browser to open [http://localhost:6080](http://localhost:6080) or use a VNC client to connect to localhost:5901. You should now see Code - OSS!
+2. After the build is complete, open a web browser and go to [http://localhost:6080](http://localhost:6080) or use a [VNC Viewer](https://www.realvnc.com/en/connect/download/viewer/) to connect to `localhost:5901`.
+
+3. You should now see Code - OSS!
 
 Next, let's try debugging.
 
-1. Shut down Code - OSS by clicking the box in the upper right corner using your browser or VNC client.
+1. Shut down Code - OSS by clicking the box in the upper right corner of the Code - OSS window through your browser or VNC viewer.
 
 2. Go to your local VS Code client, and use Run / Debug view to launch the **VS Code** configuration. (Typically the default, so you can likely just press <kbd>F5</kbd>).
 
-    > **Note:** If launching times out, you can increase the value of `timeout` in the VS Code, Attach Main Process, Attach Extension Host, and Attach to Shared Process configurations.
+    > **Note:** If launching times out, you can increase the value of `timeout` in the "VS Code", "Attach Main Process", "Attach Extension Host", and "Attach to Shared Process" configurations in [launch.json](../.vscode/launch.json). However, running `scripts/code.sh` first will set up Electron which will usually solve timeout issues.
 
 3. After a bit, Code - OSS will appear with the debugger attached!
 

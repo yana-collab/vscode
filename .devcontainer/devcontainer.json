@@ -19,7 +19,8 @@
 		"resmon.show.battery": false,
 		"resmon.show.cpufreq": false,
 		"remote.extensionKind": {
-			"ms-vscode.js-debug-nightly": "workspace"
+			"ms-vscode.js-debug-nightly": "workspace",
+			"msjsdiag.debugger-for-chrome": "workspace"
 		},
 		"debug.chrome.useV3": true
 	},
@@ -28,13 +29,12 @@
 	"forwardPorts": [6080, 5901],
 
 	"extensions": [
-		"ms-vscode.vscode-typescript-tslint-plugin",
 		"dbaeumer.vscode-eslint",
 		"EditorConfig.EditorConfig",
 		"ms-vscode.js-debug-nightly",
-		"eamodio.gitlens",
-		"GitHub.vscode-pull-request-github",
-		"mutantdino.resourcemonitor"
+		"msjsdiag.debugger-for-chrome",
+		"mutantdino.resourcemonitor",
+		"GitHub.vscode-pull-request-github"
 	],
 
 	"remoteUser": "node"

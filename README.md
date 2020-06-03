@@ -58,7 +58,7 @@ VS Code includes a set of built-in extensions located in the [extensions](extens
 
 ## Development Container
 
-This repository includes a Visual Studio Code Remote - Containers / Codespaces development container. We suggest using the **Remote-Containers: Open Repository in Container...**  in [Remote - Containers](https://aka.ms/vscode-remote/download/containers) or using the [Visual Studio Code extension](https://aka.ms/vscs-ext-vscode) to connect to a Codespace. See this repository's [development container README](.devcontainer/README.md) for more recommendations.
+This repository includes a Visual Studio Code Remote - Containers / Codespaces development container. You can open it using the **Remote-Containers: Open Repository in Container...** from the [Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension or by referencing the repository Git URL when creating a cloud-based environment using the [Visual Studio Codespaces](https://aka.ms/vscs-ext-vscode) extension. See the [development container README](.devcontainer/README.md) for more details on its use.
 
 ## Code of Conduct
 
