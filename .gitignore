@@ -1,33 +1,33 @@
+# Created by https://www.toptal.com/developers/gitignore/api/osx
+# Edit at https://www.toptal.com/developers/gitignore?templates=osx
+
+### OSX ###
+# General
 .DS_Store
-.cache
-npm-debug.log
-Thumbs.db
-node_modules/
-.build/
-extensions/**/dist/
-out/
-out-build/
-out-editor/
-out-editor-src/
-out-editor-build/
-out-editor-esm/
-out-editor-esm-bundle/
-out-editor-min/
-out-monaco-editor-core/
-out-vscode/
-out-vscode-min/
-out-vscode-reh/
-out-vscode-reh-min/
-out-vscode-reh-pkg/
-out-vscode-reh-web/
-out-vscode-reh-web-min/
-out-vscode-reh-web-pkg/
-out-vscode-web/
-out-vscode-web-min/
-src/vs/server
-resources/server
-build/node_modules
-coverage/
-test_data/
-test-results/
-yarn-error.log
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# End of https://www.toptal.com/developers/gitignore/api/osx
